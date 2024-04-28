@@ -8,10 +8,10 @@ ARG USERNAME=node
 #     && useradd -s /bin/bash --uid ${USER_ID} --gid ${USER_GID} -m ${USERNAME}
 
 RUN apt-get update && apt-get install -y sudo\
-&& apt-get clean \
-&& rm -rf /var/lib/apt/lists/* \
-&& echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
-&& chmod 0440 /etc/sudoers.d/${USERNAME}   
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
+    && chmod 0440 /etc/sudoers.d/${USERNAME}   
 
 USER node
 WORKDIR /home/node/workspaces
@@ -26,5 +26,5 @@ RUN sudo corepack enable \
     && pnpm config set store-dir /usr/local/share/.pnpm-store
 
 # パッケージを導入
-RUN pnpm add -g typescript @types/node ts-node @biomejs/biome \
+RUN pnpm add -g typescript @types/node ts-node @biomejs/biome @nestjs/cli \
     && pnpm dlx @biomejs/biome init
