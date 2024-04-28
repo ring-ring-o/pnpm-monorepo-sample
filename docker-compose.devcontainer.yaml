@@ -1,0 +1,20 @@
+name: devcontainer
+version: '3.8'
+
+services:
+  pnpm-monorepo-sample:
+    build:
+      context: .
+      dockerfile: "./.devcontainer/dockerfile"
+    container_name: workspace
+    hostname: workspace
+    volumes:
+      - type: bind
+        source: ./
+        target: /home/node/workspaces/
+    command: ["tail", "-f", "/dev/null"]
+    networks:
+      - default
+
+networks:
+  default:
